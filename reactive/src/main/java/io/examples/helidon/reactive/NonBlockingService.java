@@ -1,12 +1,10 @@
 package io.examples.helidon.reactive;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Function;
 
-import io.helidon.common.http.InternalServerException;
 import io.helidon.common.reactive.Multi;
 import io.helidon.common.reactive.Single;
 import io.helidon.reactive.webclient.WebClient;
