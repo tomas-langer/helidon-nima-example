@@ -46,6 +46,17 @@ class BlockingService implements HttpService {
         res.send(response);
     }
 
+    private void sequence(ServerRequest req, ServerResponse res) {
+        int count = count(req);
+        List<String> responses = new LinkedList<>();
+
+        for (int i = 0; i < count; i++) {
+            responses.add(callRemote(client));
+        }
+
+        res.send("Combined results: " + responses);
+    }
+
     private void parallel(ServerRequest req, ServerResponse res) {
         int count = count(req);
 
@@ -70,19 +81,10 @@ class BlockingService implements HttpService {
         res.send("Combined results: " + responses);
     }
 
-    private void sequence(ServerRequest req, ServerResponse res) {
-        int count = count(req);
-        List<String> responses = new LinkedList<>();
-
-        for (int i = 0; i < count; i++) {
-            responses.add(callRemote(client));
-        }
-
-        res.send("Combined results: " + responses);
-    }
-
     private static String callRemote(Http1Client client) {
-        return client.get().path("/remote").request(String.class);
+        return client.get()
+                .path("/remote")
+                .request(String.class);
     }
 
     private int count(ServerRequest req) {

@@ -4,14 +4,16 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import io.helidon.common.http.Http;
 import io.helidon.common.http.InternalServerException;
 import io.helidon.nima.webclient.http1.Http1Client;
 import io.helidon.nima.webserver.WebServer;
-import io.helidon.nima.webserver.http.HttpRules;
+import io.helidon.nima.webserver.http.HttpRouting;
 import io.helidon.nima.webserver.http.ServerRequest;
 import io.helidon.nima.webserver.http.ServerResponse;
 
 public class NimaMain {
+    private static final Http.HeaderValue SERVER = Http.HeaderValue.create(Http.Header.SERVER, "Nima");
     private static final AtomicInteger COUNTER = new AtomicInteger();
     // no need to use secure random to compute sleep times
     private static final Random RANDOM = new Random();
@@ -26,8 +28,12 @@ public class NimaMain {
                                        .build());
     }
 
-    static void routing(HttpRules rules) {
-        rules.get("/remote", NimaMain::remote)
+    static void routing(HttpRouting.Builder rules) {
+        rules.addFilter((chain, req, res) -> {
+                    res.header(SERVER);
+                    chain.proceed();
+                })
+                .get("/remote", NimaMain::remote)
                 .register("/", new BlockingService());
     }
 
