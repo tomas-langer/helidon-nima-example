@@ -7,8 +7,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import io.helidon.common.LogConfig;
 import io.helidon.config.Config;
+import io.helidon.logging.common.LogConfig;
 import io.helidon.reactive.webserver.Routing;
 import io.helidon.reactive.webserver.ServerRequest;
 import io.helidon.reactive.webserver.ServerResponse;
@@ -30,12 +30,12 @@ public class ReactiveMain {
                 .start()
                 .await(Duration.ofSeconds(10));
 
-        NonBlockingService.port(ws.port());
+        ReactiveService.port(ws.port());
     }
 
     static void routing(Routing.Rules rules) {
         rules.get("/remote", ReactiveMain::remote)
-                .register("/", new NonBlockingService());
+                .register("/", new ReactiveService());
     }
 
     private static void remote(ServerRequest req, ServerResponse res) {

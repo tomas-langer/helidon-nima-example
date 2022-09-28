@@ -18,7 +18,7 @@
     </modules>
 
     <properties>
-        <helidon.version>4.0.0-ALPHA1</helidon.version>
+        <helidon.version>4.0.0-ALPHA2</helidon.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -86,10 +86,6 @@
         <dependency>
             <groupId>io.helidon.health</groupId>
             <artifactId>helidon-health-checks</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.json</groupId>
-            <artifactId>jakarta.json-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

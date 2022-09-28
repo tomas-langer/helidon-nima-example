@@ -13,7 +13,7 @@ import io.helidon.nima.webserver.http.ServerRequest;
 import io.helidon.nima.webserver.http.ServerResponse;
 
 public class NimaMain {
-    private static final Http.HeaderValue SERVER = Http.HeaderValue.create(Http.Header.SERVER, "Nima");
+    private static final Http.HeaderValue SERVER = Http.Header.create(Http.Header.SERVER, "Nima");
     private static final AtomicInteger COUNTER = new AtomicInteger();
     // no need to use secure random to compute sleep times
     private static final Random RANDOM = new Random();
