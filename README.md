@@ -10,11 +10,16 @@ Nevertheless, if you encounter an issue with Helidon, please kindly report it at
 Java 19 with preview feature "Loom" (now available as RC at https://jdk.java.net/19/)
 Maven
 
+    java -version
+
+Set your `JAVA_HOME` environment variable as appropriate, and don't forget to update your `PATH` variable too.
+
 ### Mac OS
 
-     export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home
+Use `/usr/libexec/java_home -V` to see if you have an appropriate JVM. For example...
 
-or wherever JDK 19 or newer is
+     export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home
+     export PATH=${JAVA_HOME}/bin:${PATH}
 
 ## How to
 
