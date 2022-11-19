@@ -10,6 +10,12 @@ Nevertheless, if you encounter an issue with Helidon, please kindly report it at
 Java 19 with preview feature "Loom" (now available as RC at https://jdk.java.net/19/)
 Maven
 
+### Mac OS
+
+     export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-19.jdk/Contents/Home
+
+or wherever JDK 19 or newer is
+
 ## How to
 
 1. Build the project from the repository root
