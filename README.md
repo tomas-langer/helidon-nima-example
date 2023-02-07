@@ -1,6 +1,6 @@
 # helidon-nima-example
 Helidon Níma Example - Loom based webserver
-This example is built on top of an ALPHA-1 release of Helidon 4. Alpha releases serve as prototypes or technology demonstration.
+This example is built on top of an ALPHA-4 release of Helidon 4. Alpha releases serve as prototypes or technology demonstration.
 
 The code is not yet production quality in all of its aspects, and problems may be expected.
 
