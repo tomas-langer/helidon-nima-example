@@ -20,6 +20,7 @@ public class NimaMain {
 
     public static void main(String[] args) {
         WebServer ws = WebServer.builder()
+                .port(8080)
                 .routing(NimaMain::routing)
                 .start();
 
