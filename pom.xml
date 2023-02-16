@@ -25,9 +25,6 @@
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
         <maven.compiler.release>${maven.compiler.source}</maven.compiler.release>
-
-        <mainClass>io.helidon.examples.nima.quickstart.standalone.StandaloneQuickstartMain</mainClass>
-
         <!-- plugin versions -->
         <version.plugin.compiler>3.8.1</version.plugin.compiler>
         <version.plugin.dependency>3.0.0</version.plugin.dependency>
