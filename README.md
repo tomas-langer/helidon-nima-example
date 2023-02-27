@@ -18,7 +18,16 @@ Maven
 2. Run the application
 
         java --enable-preview -jar nima/target/example-nima-blocking.jar
-3. Call the endpoints (default count is 3)
+        
+3. Build a [GraalVM Native Image](https://www.graalvm.org/22.0/reference-manual/native-image/) version of your application
+
+        native-image --enable-preview -jar nima/target/example-nima-blocking.jar
+ 
+   You can then run the native executable version of your application with the following:
+ 
+        ./example-nima-blocking
+        
+4. Call the endpoints (default count is 3)
 
         curl -i http://localhost:8080/one
         curl -i http://localhost:8080/sequence
