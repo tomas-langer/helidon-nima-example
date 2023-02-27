@@ -87,6 +87,10 @@
             <groupId>io.helidon.health</groupId>
             <artifactId>helidon-health-checks</artifactId>
         </dependency>
+            <dependency>
+            <groupId>io.helidon.config</groupId>
+            <artifactId>helidon-config-yaml</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>

@@ -34,3 +34,21 @@ Maven
         curl -i http://localhost:8080/sequence?count=4
         curl -i http://localhost:8080/parallel
         curl -i http://localhost:8080/parallel?count=2
+
+5. Optimizing performance of a native executable with profile-guided optimizations
+
+Build an instrumented image: 
+
+        native-image --enable-preview --pgo-instrument -jar nima/target/example-nima-blocking.jar
+
+Run and apply relevant workloads to collect profiles:
+
+        ./example-nima-blocking
+        http://localhost:8080/one
+        http://localhost:8080/sequence
+
+After application shutdown profiles will be stored in `default.iprof`.
+
+Build an optimized executable:
+
+        native-image --enable-preview --pgo=default.iprof  -jar nima/target/example-nima-blocking.jar
