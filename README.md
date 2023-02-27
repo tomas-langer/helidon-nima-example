@@ -19,7 +19,7 @@ Maven
 
         java --enable-preview -jar nima/target/example-nima-blocking.jar
         
-3. Build a Native Image version of your application
+3. Build a [GraalVM Native Image](https://www.graalvm.org/22.0/reference-manual/native-image/) version of your application
 
         native-image --enable-preview -jar nima/target/example-nima-blocking.jar
  
