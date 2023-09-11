@@ -1,6 +1,6 @@
 package io.examples.helidon.reactive;
 
-import io.helidon.reactive.webclient.WebClient;
+import io.helidon.webclient.WebClient;
 
 public class ReactiveClient {
     public static void main(String[] args) {

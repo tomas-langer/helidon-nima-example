@@ -1,12 +1,12 @@
 package io.examples.helidon.nima;
 
-import io.helidon.nima.testing.junit5.webserver.ServerTest;
-import io.helidon.nima.webclient.http1.Http1Client;
+import io.helidon.webclient.api.WebClient;
+import io.helidon.webserver.testing.junit5.ServerTest;
 
 // test proper HTTP communication, opens socket
 @ServerTest
 class BlockingServiceIT extends AbstractBlockingServiceTest {
-    BlockingServiceIT(Http1Client client) {
+    BlockingServiceIT(WebClient client) {
         super(client);
     }
 }

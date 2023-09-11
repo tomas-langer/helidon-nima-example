@@ -7,12 +7,12 @@ import java.util.function.Function;
 
 import io.helidon.common.reactive.Multi;
 import io.helidon.common.reactive.Single;
-import io.helidon.reactive.faulttolerance.Async;
-import io.helidon.reactive.webclient.WebClient;
-import io.helidon.reactive.webserver.Routing;
-import io.helidon.reactive.webserver.ServerRequest;
-import io.helidon.reactive.webserver.ServerResponse;
-import io.helidon.reactive.webserver.Service;
+import io.helidon.faulttolerance.Async;
+import io.helidon.webclient.WebClient;
+import io.helidon.webserver.Routing;
+import io.helidon.webserver.ServerRequest;
+import io.helidon.webserver.ServerResponse;
+import io.helidon.webserver.Service;
 
 class ReactiveService implements Service {
     private static final ExecutorService EXECUTOR = Executors.newVirtualThreadPerTaskExecutor();

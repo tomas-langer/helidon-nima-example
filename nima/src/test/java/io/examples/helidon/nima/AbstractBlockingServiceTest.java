@@ -2,11 +2,11 @@ package io.examples.helidon.nima;
 
 import java.util.Arrays;
 
-import io.helidon.common.http.Http;
-import io.helidon.nima.testing.junit5.webserver.SetUpRoute;
-import io.helidon.nima.webclient.http1.Http1Client;
-import io.helidon.nima.webclient.http1.Http1ClientResponse;
-import io.helidon.nima.webserver.http.HttpRouting;
+import io.helidon.http.Http;
+import io.helidon.webclient.api.ClientResponseTyped;
+import io.helidon.webclient.api.WebClient;
+import io.helidon.webserver.http.HttpRouting;
+import io.helidon.webserver.testing.junit5.SetUpRoute;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +17,9 @@ import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 abstract class AbstractBlockingServiceTest {
-    private final Http1Client client;
+    private final WebClient client;
 
-    protected AbstractBlockingServiceTest(Http1Client client) {
+    protected AbstractBlockingServiceTest(WebClient client) {
         this.client = client;
         BlockingService.client(client);
     }
@@ -31,63 +31,61 @@ abstract class AbstractBlockingServiceTest {
 
     @Test
     void testOne() {
-        try (Http1ClientResponse response = client.get("/one")
-                .request()) {
+        ClientResponseTyped<String> response = client.get("/one")
+                .request(String.class);
 
-            assertThat(response.status(), is(Http.Status.OK_200));
-            String entity = response.as(String.class);
-            assertThat(entity, startsWith("remote_"));
-        }
+        assertThat(response.status(), is(Http.Status.OK_200));
+        assertThat(response.entity(), startsWith("remote_"));
     }
 
     @Test
     void testSequence() {
-        try (Http1ClientResponse response = client.get("/sequence").request()) {
-            assertThat(response.status(), is(Http.Status.OK_200));
-            String entity = response.as(String.class);
-            int[] results = splitAndValidateEntity(entity);
-            validateUnique(results);
-            validateSequence(results);
-            validateOrdered(results);
-        }
+        ClientResponseTyped<String> response = client.get("/sequence")
+                .request(String.class);
+
+        assertThat(response.status(), is(Http.Status.OK_200));
+        String entity = response.entity();
+        int[] results = splitAndValidateEntity(entity);
+        validateUnique(results);
+        validateSequence(results);
+        validateOrdered(results);
     }
 
     @Test
     void testSequenceParam() {
-        try (Http1ClientResponse response = client.get("/sequence")
+        ClientResponseTyped<String> response = client.get("/sequence")
                 .queryParam("count", "11")
-                .request()) {
-            assertThat(response.status(), is(Http.Status.OK_200));
-            String entity = response.as(String.class);
-            int[] results = splitAndValidateEntity(entity);
-            validateUnique(results);
-            validateSequence(results);
-            validateOrdered(results);
-        }
+                .request(String.class);
+        assertThat(response.status(), is(Http.Status.OK_200));
+        String entity = response.entity();
+        int[] results = splitAndValidateEntity(entity);
+        validateUnique(results);
+        validateSequence(results);
+        validateOrdered(results);
     }
 
     @Test
     void testParallel() {
-        try (Http1ClientResponse response = client.get("/parallel").request()) {
-            assertThat(response.status(), is(Http.Status.OK_200));
-            String entity = response.as(String.class);
-            int[] results = splitAndValidateEntity(entity);
-            validateUnique(results);
-            validateSequence(results);
-        }
+        ClientResponseTyped<String> response = client.get("/parallel")
+                .request(String.class);
+
+        assertThat(response.status(), is(Http.Status.OK_200));
+        String entity = response.entity();
+        int[] results = splitAndValidateEntity(entity);
+        validateUnique(results);
+        validateSequence(results);
     }
 
     @Test
     void testParallelParam() {
-        try (Http1ClientResponse response = client.get("/parallel")
+        ClientResponseTyped<String> response = client.get("/parallel")
                 .queryParam("count", "11")
-                .request()) {
-            assertThat(response.status(), is(Http.Status.OK_200));
-            String entity = response.as(String.class);
-            int[] results = splitAndValidateEntity(entity);
-            validateUnique(results);
-            validateSequence(results);
-        }
+                .request(String.class);
+        assertThat(response.status(), is(Http.Status.OK_200));
+        String entity = response.entity();
+        int[] results = splitAndValidateEntity(entity);
+        validateUnique(results);
+        validateSequence(results);
     }
 
     private void validateOrdered(int[] results) {

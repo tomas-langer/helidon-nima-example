@@ -9,8 +9,9 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Helidon Níma Standalone Example Project</name>
-    <description>Example demonstrating Helidon Níma and advantages of blocking over reactive with project Loom.</description>
+    <name>Helidon Standalone Example Project</name>
+    <description>Example demonstrating Helidon 4.0.0 built on Virtual Threads (project Níma)
+        and advantages of blocking over reactive with project Loom.</description>
 
     <modules>
         <module>nima</module>
@@ -18,15 +19,11 @@
     </modules>
 
     <properties>
-        <helidon.version>4.0.0-ALPHA4</helidon.version>
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
         <maven.compiler.release>${maven.compiler.source}</maven.compiler.release>
-
-        <mainClass>io.helidon.examples.nima.quickstart.standalone.StandaloneQuickstartMain</mainClass>
 
         <!-- plugin versions -->
         <version.plugin.compiler>3.8.1</version.plugin.compiler>
@@ -41,69 +38,6 @@
         <version.plugin.surefire>3.0.0-M5</version.plugin.surefire>
     </properties>
 
-
-    <dependencyManagement>
-        <dependencies>
-            <!--
-            Dependency management of Helidon and its third party dependencies.
-            If you want to manage all third party dependencies, switch the artifact id to helidon-bom instead.
-            -->
-            <dependency>
-                <groupId>io.helidon</groupId>
-                <artifactId>helidon-dependencies</artifactId>
-                <version>${helidon.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>io.helidon.nima.webserver</groupId>
-            <artifactId>helidon-nima-webserver</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.nima.webclient</groupId>
-            <artifactId>helidon-nima-webclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.nima.http2</groupId>
-            <artifactId>helidon-nima-http2-webclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.nima.http2</groupId>
-            <artifactId>helidon-nima-http2-webserver</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.nima.http.media</groupId>
-            <artifactId>helidon-nima-http-media-jsonp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.nima.observe</groupId>
-            <artifactId>helidon-nima-observe-health</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.health</groupId>
-            <artifactId>helidon-health-checks</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.nima.testing.junit5</groupId>
-            <artifactId>helidon-nima-testing-junit5-webserver</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <build>
         <pluginManagement>
             <plugins>
@@ -111,11 +45,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${version.plugin.compiler}</version>
-                    <configuration>
-                        <compilerArgs>
-                            <compilerArg>--enable-preview</compilerArg>
-                        </compilerArgs>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -123,7 +52,6 @@
                     <version>${version.plugin.surefire}</version>
                     <configuration>
                         <useModulePath>false</useModulePath>
-                        <argLine>--enable-preview</argLine>
                         <trimStackTrace>false</trimStackTrace>
                     </configuration>
                 </plugin>
@@ -134,7 +62,6 @@
                     <configuration>
                         <useModulePath>false</useModulePath>
                         <redirectTestOutputToFile>true</redirectTestOutputToFile>
-                        <argLine>--enable-preview</argLine>
                     </configuration>
                 </plugin>
                 <plugin>

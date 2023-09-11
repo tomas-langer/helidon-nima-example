@@ -7,12 +7,12 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import io.helidon.common.LogConfig;
 import io.helidon.config.Config;
-import io.helidon.logging.common.LogConfig;
-import io.helidon.reactive.webserver.Routing;
-import io.helidon.reactive.webserver.ServerRequest;
-import io.helidon.reactive.webserver.ServerResponse;
-import io.helidon.reactive.webserver.WebServer;
+import io.helidon.webserver.Routing;
+import io.helidon.webserver.ServerRequest;
+import io.helidon.webserver.ServerResponse;
+import io.helidon.webserver.WebServer;
 
 public class ReactiveMain {
     private static final AtomicInteger COUNTER = new AtomicInteger();

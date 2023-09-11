@@ -4,26 +4,31 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import io.helidon.common.http.Http;
-import io.helidon.common.http.InternalServerException;
-import io.helidon.nima.webclient.http1.Http1Client;
-import io.helidon.nima.webserver.WebServer;
-import io.helidon.nima.webserver.http.HttpRouting;
-import io.helidon.nima.webserver.http.ServerRequest;
-import io.helidon.nima.webserver.http.ServerResponse;
+import io.helidon.config.Config;
+import io.helidon.http.Http;
+import io.helidon.http.InternalServerException;
+import io.helidon.webclient.api.WebClient;
+import io.helidon.webserver.WebServer;
+import io.helidon.webserver.http.HttpRouting;
+import io.helidon.webserver.http.ServerRequest;
+import io.helidon.webserver.http.ServerResponse;
 
 public class NimaMain {
-    private static final Http.HeaderValue SERVER = Http.Header.create(Http.Header.SERVER, "Nima");
+    private static final Http.Header SERVER = Http.Headers.create(Http.HeaderNames.SERVER, "Nima");
     private static final AtomicInteger COUNTER = new AtomicInteger();
     // no need to use secure random to compute sleep times
     private static final Random RANDOM = new Random();
 
     public static void main(String[] args) {
+        Config config = Config.create();
+
         WebServer ws = WebServer.builder()
                 .routing(NimaMain::routing)
+                .config(config.get("server"))
+                .build()
                 .start();
 
-        BlockingService.client(Http1Client.builder()
+        BlockingService.client(WebClient.builder()
                                        .baseUri("http://localhost:" + ws.port())
                                        .build());
     }

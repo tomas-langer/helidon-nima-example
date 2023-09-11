@@ -1,14 +1,13 @@
 package io.examples.helidon.nima;
 
-import io.helidon.nima.webclient.http1.Http1Client;
-import io.helidon.nima.webclient.http1.Http1ClientResponse;
+import io.helidon.webclient.api.HttpClientResponse;
+import io.helidon.webclient.api.WebClient;
 
 public class NimaClient {
     public static void main(String[] args) {
-        Http1Client client = Http1Client.builder()
-                .build();
+        WebClient client = WebClient.create();
 
-        try (Http1ClientResponse response = client.get()
+        try (HttpClientResponse response = client.get()
                 .uri("http://localhost:8080/one")
                 .request()) {
 
